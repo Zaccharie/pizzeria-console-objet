@@ -79,10 +79,12 @@ public class Pizza {
 	
 	public static void updatePizza(String code, String codeUpdate, String nomUpdate, double prixUpdate, Pizza[] pizzaTab) {
 		for(Pizza current: pizzaTab) {
-			if(current.getCode().equals(code)) {
-				current.setCode(codeUpdate);
-				current.setNom(nomUpdate);
-				current.setPrix(prixUpdate);
+			if(current != null) {
+				if(current.getCode().equals(code)) {
+					current.setCode(codeUpdate);
+					current.setNom(nomUpdate);
+					current.setPrix(prixUpdate);
+				}
 			}
 		}
 	}
