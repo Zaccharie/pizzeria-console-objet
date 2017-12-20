@@ -1,7 +1,12 @@
 package fr.pizzeria.console;
 
-import fr.pizzeria.model.Pizza;
 import java.util.Scanner;
+
+import fr.pizzeria.ihm.AjouterPizzaOptionMenu;
+import fr.pizzeria.ihm.ListerPizzasOptionMenu;
+import fr.pizzeria.ihm.ModifierPizzaOptionMenu;
+import fr.pizzeria.ihm.SupprimerPizzaOptionMenu;
+import fr.pizzeria.model.*;
 
 public class PizzeriaAdminConsoleApp {
 
@@ -22,13 +27,17 @@ public class PizzeriaAdminConsoleApp {
 		pizzaTab[7] = new Pizza("IND", "L'indienne", 14.00);
 		
 		Scanner scan = new Scanner(System.in);
+		ListerPizzasOptionMenu lister = new ListerPizzasOptionMenu(pizzaTab, scan, "1. Lister les pizzas");
+		AjouterPizzaOptionMenu ajouter = new AjouterPizzaOptionMenu(pizzaTab, scan, "2. Ajouter une nouvelle pizza");
+		ModifierPizzaOptionMenu modifier = new ModifierPizzaOptionMenu(pizzaTab, scan, "3. Modifier une pizza");
+		SupprimerPizzaOptionMenu supprimer = new SupprimerPizzaOptionMenu(pizzaTab, scan, "4. Supprimer une pizza");
 		
 		do {
 			System.out.println("***** Pizzeria Administration *****");
-			System.out.println("1. Lister les pizzas");
-			System.out.println("2. Ajouter une nouvelle pizza");
-			System.out.println("3. Mettre à jour une pizza");
-			System.out.println("4. Supprimer une pizza");
+			System.out.println(lister.getLibelle());
+			System.out.println(ajouter.getLibelle());
+			System.out.println(modifier.getLibelle());
+			System.out.println(supprimer.getLibelle());
 			System.out.println("99. Sortir");
 			
 			int choix = scan.nextInt();
@@ -41,61 +50,19 @@ public class PizzeriaAdminConsoleApp {
 				break;
 				
 				case(1):
-					System.out.println("***** Liste des pizzas: ");
-					Pizza.readTab(pizzaTab);
+					lister.execute();
 				break;
 				
 				case(2):
-					System.out.println("***** Ajout d'une nouvelle pizza");	
-					System.out.println("Veuillez saisir le code:");
-					String code = scan.next();
-					System.out.println("Veuillez saisir le nom:");
-					String nom = scan.next();
-					System.out.println("Veuillez saisir le prix:");
-					double prix = scan.nextDouble();
-					
-					//creation de l'objet Pizza
-					Pizza newPizza  = new Pizza(code,nom,prix);
-					//nouveau tableau de pizzas
-					pizzaTab = Pizza.addPizza(newPizza, pizzaTab);
-					
+					ajouter.execute();
 				break;
 				
 				case(3):
-					System.out.println("***** Mise à jour d'une pizza");
-					Pizza.readTab(pizzaTab);
-					System.out.println("Veuillez saisir le code de la pizza à modifier:");
-					System.out.println("(99 pour abandonner)");
-					String codePizzaUpdate = scan.next();
-					
-					if(codePizzaUpdate.equals("99")) {
-						break;
-					}
-					else {
-						System.out.println("Veuillez saisir le code:");
-						String codeUpdate = scan.next();
-						System.out.println("Veuillez saisir le nom:");
-						String nomUpdate = scan.next();
-						System.out.println("Veuillez saisir le prix:");
-						double prixUpdate = scan.nextDouble();
-						
-						Pizza.updatePizza(codePizzaUpdate, codeUpdate, nomUpdate, prixUpdate, pizzaTab);
-					}
+					modifier.execute();
 				break;
 				
 				case(4):
-					System.out.println("***** Suppression d'une pizza");
-					Pizza.readTab(pizzaTab);
-					System.out.println("Veuillez saisir le code de la pizza à supprimer:");
-					System.out.println("(99 pour abandonner)");
-					String codePizzaDelete = scan.next();
-					
-					if(codePizzaDelete.equals("99")) {
-						break;
-					}
-					else {
-						pizzaTab = Pizza.deletePizza(codePizzaDelete, pizzaTab);
-					}
+					supprimer.execute();
 				break;
 			}
 			
