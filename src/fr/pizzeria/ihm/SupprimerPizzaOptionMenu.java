@@ -2,12 +2,13 @@ package fr.pizzeria.ihm;
 
 import java.util.Scanner;
 
+import fr.pizzeria.dao.PizzaDaoImpl;
 import fr.pizzeria.model.Pizza;
 
 public class SupprimerPizzaOptionMenu extends OptionMenu {
 	
-	public SupprimerPizzaOptionMenu(Pizza[] pizzaTab, Scanner scan, String libelle) {
-		super(pizzaTab, scan, libelle);
+	public SupprimerPizzaOptionMenu(PizzaDaoImpl dao, Scanner scan, String libelle) {
+		super(dao, scan, libelle);
 	}
 	
 	public void execute() {
@@ -21,16 +22,7 @@ public class SupprimerPizzaOptionMenu extends OptionMenu {
 			return;
 		}
 		else {
-			Pizza[] tempTab = new Pizza[(pizzaTab.length)]; //creer un tableau de longeur - 1
-			for(int i = 0; i < pizzaTab.length; i++){
-				if(pizzaTab[i].getCode().equals(codePizzaDelete)) {
-					tempTab[i] = null;
-				}
-				else {
-					tempTab[i] = pizzaTab[i];
-				}
-			}
-			pizzaTab = tempTab; 
+			dao.deletePizza(codePizzaDelete);
 		}
 		
 	}

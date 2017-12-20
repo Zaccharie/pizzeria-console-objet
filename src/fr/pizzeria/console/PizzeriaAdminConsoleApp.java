@@ -2,11 +2,11 @@ package fr.pizzeria.console;
 
 import java.util.Scanner;
 
+import fr.pizzeria.dao.PizzaDaoImpl;
 import fr.pizzeria.ihm.AjouterPizzaOptionMenu;
 import fr.pizzeria.ihm.ListerPizzasOptionMenu;
 import fr.pizzeria.ihm.ModifierPizzaOptionMenu;
 import fr.pizzeria.ihm.SupprimerPizzaOptionMenu;
-import fr.pizzeria.model.*;
 
 public class PizzeriaAdminConsoleApp {
 
@@ -14,23 +14,14 @@ public class PizzeriaAdminConsoleApp {
 		// TODO Auto-generated method stub
 		
 		boolean printMenu = true;
-		Pizza[] pizzaTab = new Pizza[8];
-		
-		//initialisation du tableau avec les valeurs par defaut
-		pizzaTab[0] = new Pizza("PEP", "Pépéroni", 12.50);
-		pizzaTab[1] = new Pizza("MAR", "Margherita", 14.00);
-		pizzaTab[2] = new Pizza("REIN", "La Reine", 11.50);
-		pizzaTab[3] = new Pizza("FRO", "La 4 fromages", 12.00);
-		pizzaTab[4] = new Pizza("CAN", "La cannibale", 12.50);
-		pizzaTab[5] = new Pizza("SAV", "La savoyarde", 13.00);
-		pizzaTab[6] = new Pizza("ORI", "L'orientale", 13.50);
-		pizzaTab[7] = new Pizza("IND", "L'indienne", 14.00);
+
+		PizzaDaoImpl dao = new PizzaDaoImpl();
 		
 		Scanner scan = new Scanner(System.in);
-		ListerPizzasOptionMenu lister = new ListerPizzasOptionMenu(pizzaTab, scan, "1. Lister les pizzas");
-		AjouterPizzaOptionMenu ajouter = new AjouterPizzaOptionMenu(pizzaTab, scan, "2. Ajouter une nouvelle pizza");
-		ModifierPizzaOptionMenu modifier = new ModifierPizzaOptionMenu(pizzaTab, scan, "3. Modifier une pizza");
-		SupprimerPizzaOptionMenu supprimer = new SupprimerPizzaOptionMenu(pizzaTab, scan, "4. Supprimer une pizza");
+		ListerPizzasOptionMenu lister = new ListerPizzasOptionMenu(dao, scan, "1. Lister les pizzas");
+		AjouterPizzaOptionMenu ajouter = new AjouterPizzaOptionMenu(dao, scan, "2. Ajouter une nouvelle pizza");
+		ModifierPizzaOptionMenu modifier = new ModifierPizzaOptionMenu(dao, scan, "3. Modifier une pizza");
+		SupprimerPizzaOptionMenu supprimer = new SupprimerPizzaOptionMenu(dao, scan, "4. Supprimer une pizza");
 		
 		do {
 			System.out.println("***** Pizzeria Administration *****");

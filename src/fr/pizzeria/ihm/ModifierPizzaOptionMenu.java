@@ -2,12 +2,13 @@ package fr.pizzeria.ihm;
 
 import java.util.Scanner;
 
+import fr.pizzeria.dao.PizzaDaoImpl;
 import fr.pizzeria.model.Pizza;
 
 public class ModifierPizzaOptionMenu extends OptionMenu {
 	
-	public ModifierPizzaOptionMenu(Pizza[] pizzaTab, Scanner scan, String libelle) {
-		super(pizzaTab, scan, libelle);
+	public ModifierPizzaOptionMenu(PizzaDaoImpl dao, Scanner scan, String libelle) {
+		super(dao, scan, libelle);
 	}
 
 	public void execute() {
@@ -28,15 +29,9 @@ public class ModifierPizzaOptionMenu extends OptionMenu {
 			System.out.println("Veuillez saisir le prix:");
 			double prixUpdate = scan.nextDouble();
 			
-			for(Pizza current: pizzaTab) {
-				if(current != null) {
-					if(current.getCode().equals(codePizzaUpdate)) {
-						current.setCode(codeUpdate);
-						current.setNom(nomUpdate);
-						current.setPrix(prixUpdate);
-					}
-				}
-			}
+			Pizza pizza = new Pizza(codeUpdate, nomUpdate, prixUpdate);
+			dao.updatePizza(codePizzaUpdate, pizza);
+			
 		}
 		
 	}
