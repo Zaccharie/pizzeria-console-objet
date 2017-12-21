@@ -64,7 +64,7 @@ public class PizzeriaAdminConsoleApp {
 				System.out.println(e.getMessage());
 			}
 			catch(NumberFormatException e) {
-				System.out.println("Format du prix incorrect. Veuillez rentrer un nombre");
+				System.out.println("Format du prix incorrect. Veuillez rentrer un nombre. Si virgule, veuillez utiliser \".\" ");
 			}
 	
 			

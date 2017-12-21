@@ -35,17 +35,11 @@ public class ModifierPizzaOptionMenu extends OptionMenu {
 			
 			System.out.println("Veuillez saisir le nom:");
 			String nomUpdate = scan.next();
-			if(nomUpdate.length() > 3 || nomUpdate.length() == 0) {
-				throw new UpdatePizzaException("Le nom ne peut pas etre une chaine de caractere vide");
-			}
+
 			
 			System.out.println("Veuillez saisir le prix:");
 			String prixUpdate = scan.next();
 			double prixUpdateParse = Double.parseDouble(prixUpdate);
-			if(prixUpdateParse <= 0) {
-				throw new UpdatePizzaException("Le prix ne peut pas etre négatif ou de 0");
-			}
-			
 			if(prixUpdateParse <= 0) {
 				throw new UpdatePizzaException("Le prix ne peut pas etre négatif ou de 0");
 			}

@@ -1,5 +1,6 @@
 package fr.pizzeria.ihm;
 
+import java.util.List;
 import java.util.Scanner;
 
 import fr.pizzeria.dao.PizzaDaoImpl;
@@ -14,13 +15,11 @@ public class ListerPizzasOptionMenu extends OptionMenu {
 
 	public void execute() {
 		
-		Pizza[] pizzaTab = dao.findAllPizzas();
+		List<Pizza> pizzaTab = dao.findAllPizzas();
 		
 		System.out.println("***** Liste des pizzas: ");
 		for(Pizza currentPizza: pizzaTab) {
-			if(currentPizza != null) {
-				System.out.println(currentPizza.getCode() + " -> " + currentPizza.getNom() + " ("+currentPizza.getPrix()+") ");
-			}
+			System.out.println(currentPizza.getCode() + " -> " + currentPizza.getNom() + " ("+currentPizza.getPrix()+") ");
 		}
 	}
 }
