@@ -3,6 +3,7 @@ package fr.pizzeria.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
 public class PizzaDaoImpl implements IPizzaDao {
@@ -11,14 +12,14 @@ public class PizzaDaoImpl implements IPizzaDao {
 	
 	public PizzaDaoImpl() {
 		pizzaTab = new ArrayList();
-		pizzaTab.add(new Pizza("PEP", "Pépéroni", 12.50));
-		pizzaTab.add(new Pizza("MAR", "Margherita", 14.00));
-		pizzaTab.add(new Pizza("REIN", "La Reine", 11.50));
-		pizzaTab.add(new Pizza("FRO", "La 4 fromages", 12.00));
-		pizzaTab.add(new Pizza("CAN", "La cannibale", 12.50));
-		pizzaTab.add(new Pizza("SAV", "La savoyarde", 13.00));
-		pizzaTab.add(new Pizza("ORI", "L'orientale", 13.50));
-		pizzaTab.add(new Pizza("IND", "L'indienne", 14.00));
+		pizzaTab.add(new Pizza("PEP", "Pépéroni", 12.50, CategoriePizza.VIANDE));
+		pizzaTab.add(new Pizza("MAR", "Margherita", 14.00, CategoriePizza.SANS_VIANDE));
+		pizzaTab.add(new Pizza("REIN", "La Reine", 11.50, CategoriePizza.VIANDE));
+		pizzaTab.add(new Pizza("FRO", "La 4 fromages", 12.00, CategoriePizza.SANS_VIANDE));
+		pizzaTab.add(new Pizza("CAN", "La cannibale", 12.50, CategoriePizza.VIANDE));
+		pizzaTab.add(new Pizza("SAV", "La savoyarde", 13.00, CategoriePizza.SANS_VIANDE));
+		pizzaTab.add(new Pizza("ORI", "L'orientale", 13.50, CategoriePizza.VIANDE));
+		pizzaTab.add(new Pizza("IND", "L'indienne", 14.00, CategoriePizza.VIANDE));
 	}
 	
 	@Override
@@ -46,9 +47,7 @@ public class PizzaDaoImpl implements IPizzaDao {
 		for(Pizza currentPizza: pizzaTab) {
 			if(currentPizza != null) {
 				if(currentPizza.getCode().equals(codePizza)) {
-					currentPizza.setCode(pizza.getCode());
-					currentPizza.setNom(pizza.getNom());
-					currentPizza.setPrix(pizza.getPrix());
+					pizzaTab.set(pizzaTab.indexOf(currentPizza), pizza);
 				}
 			}
 		}

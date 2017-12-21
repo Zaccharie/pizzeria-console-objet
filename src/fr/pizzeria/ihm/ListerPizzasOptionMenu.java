@@ -19,7 +19,7 @@ public class ListerPizzasOptionMenu extends OptionMenu {
 		
 		System.out.println("***** Liste des pizzas: ");
 		for(Pizza currentPizza: pizzaTab) {
-			System.out.println(currentPizza.getCode() + " -> " + currentPizza.getNom() + " ("+currentPizza.getPrix()+") ");
+			System.out.println(currentPizza.getCode() + " -> " + currentPizza.getNom() + ", categorie: " + currentPizza.getCategorie() + ", " + currentPizza.getPrix());
 		}
 	}
 }

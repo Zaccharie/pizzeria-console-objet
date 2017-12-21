@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import fr.pizzeria.dao.PizzaDaoImpl;
 import fr.pizzeria.exception.SavePizzaException;
+import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
 public class AjouterPizzaOptionMenu extends OptionMenu {
@@ -22,6 +23,18 @@ public class AjouterPizzaOptionMenu extends OptionMenu {
 			throw new SavePizzaException("Le code doit etre de 3 caractères maximum ");
 		}
 		
+		System.out.println("Veuillez saisir le numero de categorie: ");
+		System.out.println("1. Viande");
+		System.out.println("2. Sans viande");
+		System.out.println("3. Poisson");
+		String numeroCategorie = scan.next();
+		Integer numeroCategorieParse = Integer.parseInt(numeroCategorie);
+		if(!(numeroCategorieParse == 1  || numeroCategorieParse == 2 || numeroCategorieParse == 3)) {
+			throw new SavePizzaException("Veuillez choisir un des choix present sur la liste proposée");
+		}
+		CategoriePizza categorie = CategoriePizza.getCategorie(numeroCategorieParse);
+		
+		
 		System.out.println("Veuillez saisir le nom:");
 		String nom = scan.next();
 		if(nom.length() == 0) {
@@ -37,7 +50,7 @@ public class AjouterPizzaOptionMenu extends OptionMenu {
 		}
 		
 		//creation de l'objet Pizza
-		Pizza newPizza  = new Pizza(code,nom,prixParse);
+		Pizza newPizza  = new Pizza(code,nom,prixParse, categorie);
 		dao.saveNewPizza(newPizza);
 
 

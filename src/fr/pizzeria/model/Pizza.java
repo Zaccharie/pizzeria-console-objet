@@ -10,6 +10,7 @@ public class Pizza {
 	private String code;
 	private String nom;
 	private double prix;
+	private CategoriePizza categorie;
 	private static int nombrePizzaTot;
 	
 	public Integer getId() {
@@ -21,6 +22,11 @@ public class Pizza {
 	public String getCode() {
 		return code;
 	}
+	
+	public CategoriePizza getCategorie() {
+		return categorie;
+	}
+	
 	public void setCode(String code) {
 		this.code = code;
 	}
@@ -37,12 +43,13 @@ public class Pizza {
 		this.prix = prix;
 	}
 	
-	public Pizza(String code, String nom, double prix) {
+	public Pizza(String code, String nom, double prix, CategoriePizza categorie) {
 		super();
 		this.id = Pizza.nombrePizzaTot;
 		this.code = code;
 		this.nom = nom;
 		this.prix = prix;
+		this.categorie = categorie;
 		Pizza.nombrePizzaTot++;
 	}
 

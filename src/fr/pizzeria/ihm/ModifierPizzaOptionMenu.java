@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import fr.pizzeria.dao.PizzaDaoImpl;
 import fr.pizzeria.exception.UpdatePizzaException;
+import fr.pizzeria.model.CategoriePizza;
 import fr.pizzeria.model.Pizza;
 
 public class ModifierPizzaOptionMenu extends OptionMenu {
@@ -33,9 +34,21 @@ public class ModifierPizzaOptionMenu extends OptionMenu {
 				throw new UpdatePizzaException("Le code doit etre de 3 caractères maximum ");
 			}
 			
+			System.out.println("Veuillez saisir le numero de categorie: ");
+			System.out.println("1. Viande");
+			System.out.println("2. Sans viande");
+			System.out.println("3. Poisson");
+			String numeroCategorie = scan.next();
+			Integer numeroCategorieParse = Integer.parseInt(numeroCategorie);
+			if(!(numeroCategorieParse == 1  || numeroCategorieParse == 2 || numeroCategorieParse == 3)) {
+				throw new UpdatePizzaException("Veuillez choisir un des choix present sur la liste proposée");
+			}
+			CategoriePizza categorie = CategoriePizza.getCategorie(numeroCategorieParse);
+			System.out.println(categorie);
+			
 			System.out.println("Veuillez saisir le nom:");
 			String nomUpdate = scan.next();
-
+			
 			
 			System.out.println("Veuillez saisir le prix:");
 			String prixUpdate = scan.next();
@@ -44,7 +57,7 @@ public class ModifierPizzaOptionMenu extends OptionMenu {
 				throw new UpdatePizzaException("Le prix ne peut pas etre négatif ou de 0");
 			}
 			
-			Pizza pizza = new Pizza(codeUpdate, nomUpdate, prixUpdateParse);
+			Pizza pizza = new Pizza(codeUpdate, nomUpdate, prixUpdateParse, categorie);
 			dao.updatePizza(codePizzaUpdate, pizza);
 	
 		}
