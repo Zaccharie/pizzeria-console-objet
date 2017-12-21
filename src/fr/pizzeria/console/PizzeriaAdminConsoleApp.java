@@ -3,6 +3,7 @@ package fr.pizzeria.console;
 import java.util.Scanner;
 
 import fr.pizzeria.dao.PizzaDaoImpl;
+import fr.pizzeria.exception.StockageException;
 import fr.pizzeria.ihm.AjouterPizzaOptionMenu;
 import fr.pizzeria.ihm.ListerPizzasOptionMenu;
 import fr.pizzeria.ihm.ModifierPizzaOptionMenu;
@@ -33,8 +34,10 @@ public class PizzeriaAdminConsoleApp {
 			
 			int choix = scan.nextInt();
 			
-			switch(choix) {
-			
+			try {
+				
+				switch(choix) {
+				
 				case(99):
 					System.out.println("Au revoir");
 					printMenu = false;
@@ -55,9 +58,19 @@ public class PizzeriaAdminConsoleApp {
 				case(4):
 					supprimer.execute();
 				break;
+				}
 			}
+			catch(StockageException e){
+				System.out.println(e.getMessage());
+			}
+			catch(NumberFormatException e) {
+				System.out.println("Format du prix incorrect. Veuillez rentrer un nombre");
+			}
+	
 			
 		}while(printMenu);
+		
+		scan.close();
 
 	}
 

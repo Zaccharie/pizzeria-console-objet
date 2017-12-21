@@ -3,7 +3,7 @@ package fr.pizzeria.ihm;
 import java.util.Scanner;
 
 import fr.pizzeria.dao.PizzaDaoImpl;
-import fr.pizzeria.model.Pizza;
+import fr.pizzeria.exception.StockageException;
 
 abstract class OptionMenu {
 	
@@ -27,6 +27,6 @@ abstract class OptionMenu {
 		this.libelle = libelle;
 	}	
 
-	public abstract void execute();
+	public abstract void execute() throws StockageException;
 
 }

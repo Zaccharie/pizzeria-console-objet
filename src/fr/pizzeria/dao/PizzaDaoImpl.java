@@ -24,6 +24,16 @@ public class PizzaDaoImpl implements IPizzaDao {
 	}
 	
 	@Override
+	public boolean pizzaExist(String codePizza) {
+		for(Pizza current : pizzaTab) {
+			if(current.getCode().equals(codePizza)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	@Override
 	public void saveNewPizza(Pizza pizza) {
 		//nouveau tableau de pizzas
 		Pizza[] tempTab = new Pizza[(pizzaTab.length + 1)]; //creer un tableau de longeur +1
@@ -37,7 +47,7 @@ public class PizzaDaoImpl implements IPizzaDao {
 	}
 	
 	@Override
-	public void updatePizza(String codePizza, Pizza pizza) {
+	public void updatePizza(String codePizza, Pizza pizza){
 		for(Pizza current: pizzaTab) {
 			if(current != null) {
 				if(current.getCode().equals(codePizza)) {
