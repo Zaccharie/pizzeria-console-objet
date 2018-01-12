@@ -2,18 +2,17 @@ package fr.pizzeria.ihm;
 
 import java.util.Scanner;
 
-import fr.pizzeria.dao.PizzaDaoImpl;
+import fr.pizzeria.dao.IPizzaDao;
 import fr.pizzeria.exception.StockageException;
 
 abstract class OptionMenu {
 	
 	protected String libelle;
 	protected Scanner scan;
-	protected PizzaDaoImpl dao;
+	protected IPizzaDao dao;
 	
 	
-	public OptionMenu(PizzaDaoImpl dao, Scanner scan, String libelle) {
-		// TODO Auto-generated constructor stub
+	public OptionMenu(IPizzaDao dao, Scanner scan, String libelle) {
 		this.libelle = libelle;
 		this.dao = dao;
 		this.scan = scan;

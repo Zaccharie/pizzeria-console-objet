@@ -11,7 +11,7 @@ public class PizzaDaoImpl implements IPizzaDao {
 	private List<Pizza> pizzaTab; 
 	
 	public PizzaDaoImpl() {
-		pizzaTab = new ArrayList();
+		pizzaTab = new ArrayList<Pizza>();
 		pizzaTab.add(new Pizza("PEP", "Pépéroni", 12.50, CategoriePizza.VIANDE));
 		pizzaTab.add(new Pizza("MAR", "Margherita", 14.00, CategoriePizza.SANS_VIANDE));
 		pizzaTab.add(new Pizza("REIN", "La Reine", 11.50, CategoriePizza.VIANDE));

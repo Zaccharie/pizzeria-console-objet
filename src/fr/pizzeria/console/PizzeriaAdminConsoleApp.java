@@ -1,22 +1,28 @@
 package fr.pizzeria.console;
 
+import java.sql.SQLException;
 import java.util.Scanner;
 
-import fr.pizzeria.dao.PizzaDaoImpl;
+import fr.pizzeria.dao.IPizzaDao;
+import fr.pizzeria.dao.PizzaDaoJdbc;
 import fr.pizzeria.exception.StockageException;
 import fr.pizzeria.ihm.AjouterPizzaOptionMenu;
 import fr.pizzeria.ihm.ListerPizzasOptionMenu;
 import fr.pizzeria.ihm.ModifierPizzaOptionMenu;
 import fr.pizzeria.ihm.SupprimerPizzaOptionMenu;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class PizzeriaAdminConsoleApp {
+	
+	public static final Logger LOG = LoggerFactory.getLogger(PizzeriaAdminConsoleApp.class);
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ClassNotFoundException, SQLException {
 		// TODO Auto-generated method stub
 		
 		boolean printMenu = true;
 
-		PizzaDaoImpl dao = new PizzaDaoImpl();
+		IPizzaDao dao = new PizzaDaoJdbc();
 		
 		Scanner scan = new Scanner(System.in);
 		ListerPizzasOptionMenu lister = new ListerPizzasOptionMenu(dao, scan, "1. Lister les pizzas");
@@ -25,12 +31,12 @@ public class PizzeriaAdminConsoleApp {
 		SupprimerPizzaOptionMenu supprimer = new SupprimerPizzaOptionMenu(dao, scan, "4. Supprimer une pizza");
 		
 		do {
-			System.out.println("***** Pizzeria Administration *****");
-			System.out.println(lister.getLibelle());
-			System.out.println(ajouter.getLibelle());
-			System.out.println(modifier.getLibelle());
-			System.out.println(supprimer.getLibelle());
-			System.out.println("99. Sortir");
+			LOG.info("***** Pizzeria Administration *****");
+			LOG.info(lister.getLibelle());
+			LOG.info(ajouter.getLibelle());
+			LOG.info(modifier.getLibelle());
+			LOG.info(supprimer.getLibelle());
+			LOG.info("99. Sortir");
 			
 			int choix = scan.nextInt();
 			
@@ -39,7 +45,7 @@ public class PizzeriaAdminConsoleApp {
 				switch(choix) {
 				
 				case(99):
-					System.out.println("Au revoir");
+					LOG.info("Au revoir");
 					printMenu = false;
 				break;
 				
@@ -61,10 +67,10 @@ public class PizzeriaAdminConsoleApp {
 				}
 			}
 			catch(StockageException e){
-				System.out.println(e.getMessage());
+				LOG.info(e.getMessage());
 			}
 			catch(NumberFormatException e) {
-				System.out.println("Format du prix incorrect. Veuillez rentrer un nombre. Si virgule, veuillez utiliser \".\" ");
+				LOG.info("Format du prix incorrect. Veuillez rentrer un nombre. Si virgule, veuillez utiliser \".\" ");
 			}
 	
 			
